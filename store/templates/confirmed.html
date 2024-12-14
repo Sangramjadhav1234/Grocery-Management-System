@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .order-info {
+            margin-top: 20px;
+        }
+        .order-info p {
+            font-size: 18px;
+            color: #555;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #444;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmed</h1>
+        <div class="order-info">
+            <p>Order ID: {{ order.id }}</p>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
+                {% endfor %}
+                
+            </ul>
+            <p>Total Price: ${{ total_price }}</p>
+            <p>Name: {{ order.name }}</p>
+            <p>Mobile Number: {{ order.mobile_number }}</p>
+            <a href="{% url 'product_list' %}">Go To Home</a>
+        </div>
+    </div>
+</body>
+</html>

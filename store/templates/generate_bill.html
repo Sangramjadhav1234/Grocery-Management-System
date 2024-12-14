@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Bill</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-info {
+            margin-top: 20px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Bill</h1>
+        <p>Order ID: {{ order.id }}</p>
+        <ul>
+            {% for item in order.items.all %}
+                <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <p>Total Price: ${{ total_price }}</p>
+        <div class="order-info">
+            <p>Name: {{ order.name }}</p>
+            <p>Mobile Number: {{ order.mobile_number }}</p>
+        </div>
+        <a href="{% url 'order_confirmation' order_id=order.id %}">Proceed to Order Confirmation</a>
+    </div>
+</body>
+</html>
